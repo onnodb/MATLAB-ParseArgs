@@ -14,7 +14,7 @@ function [argStruct] = parseArgs(args, defArgStruct, flagParamNames)
 %             get assigned either a true/false value by parseArgs.
 %
 % EXAMPLES:
-% >> argStruct = parseArgs(varargin, struct('param1', 0.1, 'otherParam', 'test')); 
+% >> argStruct = parseArgs(varargin, struct('param1', 0.1, 'otherParam', 'test'));
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Initialization
@@ -64,7 +64,7 @@ while curArgIdx <= length(args)
                     else
                         argStruct.(curParamName) = false;
                     end
-                    
+
                     % --> paramName (skip 1 arg)
                     curArgIdx = curArgIdx + 2;
                     curParseState = parseStates.paramName;
@@ -72,10 +72,10 @@ while curArgIdx <= length(args)
                     continue;
                 end
             end
-            
+
             % Apparently, value was not explicitly specified: turn it on
             argStruct.(curParamName) = true;
-            
+
             % --> paramName
             curArgIdx = curArgIdx + 1;
             curParseState = parseStates.paramName;
@@ -92,7 +92,7 @@ while curArgIdx <= length(args)
     elseif curParseState == parseStates.paramValue
         % Save parameter value
         argStruct.(curParamName) = args{curArgIdx};
-        
+
         % --> paramName
         curArgIdx = curArgIdx + 1;
         curParseState = parseStates.paramName;
@@ -114,7 +114,7 @@ end
     function [valid] = isValidParamName(paramName, validParamNames)
         valid = ~isempty(parseParamName(paramName, validParamNames));
     end
-    
+
     function [parsedParamName] = parseParamName(paramName, validParamNames)
         parsedParamName = '';
         for j = 1:length(validParamNames)
